@@ -12,19 +12,26 @@ const CreatePost = () => {
     prompt: " ",
     photo: false,
   });
-  console.log(form.prompt)
+  console.log(form.name);
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const generateImage = () => {};
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    const randomPrompt = getRandomPrompt(form.prompt);
+  };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSurpriseMe = () => {};
+  const handleSurpriseMe = () => {
+    const randomPrompt = getRandomPrompt(form.prompt);
+    setForm({ ...form, prompt: randomPrompt });
+    console.log('handleSurpriseMe Clicked')
+    console.log(randomPrompt)
+  };
 
   return (
     <section className="max-w-7xl mx-auto">
@@ -51,7 +58,7 @@ const CreatePost = () => {
             value={form.prompt}
             handleChange={handleChange}
             isSurpriseMe
-            handleSurprise={handleSurpriseMe}
+            handleSurpriseMe={handleSurpriseMe}
           />
 
           <div
