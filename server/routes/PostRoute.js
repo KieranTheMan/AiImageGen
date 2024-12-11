@@ -24,19 +24,21 @@ router.route("/").get(async (req, res) => {
     res.status(500).json({ success: false, message: error });
   }
 });
-//create all posts
+//create a post// Check mongoose database for issues.
 
 router.route("/").post(async (req, res) => {
   try {
     const { name, prompt, photo } = req.body;
     const photoUrl = await cloudinary.uploader.upload(photo);
+    console.log(photoUrl)
 
+    //create post in database
     const newPost = await Post.create({
       name,
       prompt,
       photo: photoUrl.url,
     });
-
+    console.log(`your new post ${newPost}`)
     res.status(200).json({ success: true, data: newPost });
   } catch (error) {
     res.status(500).json({ success: false, message: error });
