@@ -26,8 +26,10 @@ router.route("/").post(async (req, res) => {
       size:"1024x1024",
       quality:'standard',
       n:1,
+      //response_format:'b64_json'
   });
     const image = aiResponse.data[0].url;
+    console.log(aiResponse)
     res.status(200).json({ photo: image });
   } catch (error) {
     console.log(error);
