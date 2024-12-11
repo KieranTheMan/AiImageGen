@@ -29,9 +29,10 @@ const CreatePost = () => {
         });
 
         const data = await response.json();
-        console.log(data);
+        
 
-        setForm({ ...form, photo: data.photo });
+        setForm({ ...form, photo: data.photo});
+        console.log(form);
       } catch (error) {
         alert(error);
         console.log(error);
@@ -54,7 +55,7 @@ const CreatePost = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ prompt: form }),
+          body: JSON.stringify(form),
         });
         await response.json();
         navigate("/");
