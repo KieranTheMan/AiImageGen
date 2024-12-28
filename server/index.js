@@ -2,7 +2,7 @@ import express from "express";
 import * as dotenv from "dotenv";
 import cors from "cors";
 import connectDB from './mongodb/connect.js'
-import postRoute from './routes/postRoute.js';
+import postRoute from './routes/PostRoute.js';
 import dalleRoute from './routes/DalleRoute.js';
 
 
