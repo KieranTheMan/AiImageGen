@@ -6,7 +6,7 @@ import postRoute from "./routes/PostRoute.js";
 import dalleRoute from "./routes/DalleRoute.js";
 
 const corsOptions = {
-  origin: "*",
+  origin: "https://coolartgen.onrender.com",
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"],
 };
@@ -15,6 +15,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 app.use(express.json({ limit: "50mb" }));
 
 app.use("/api/v1/post", postRoute);
