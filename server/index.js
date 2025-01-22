@@ -8,7 +8,7 @@ import dalleRoute from "./routes/DalleRoute.js";
 const corsOptions = {
   origin: "https://coolartgen.onrender.com",
   methods: ["GET", "POST"],
-  allowedHeaders: ["Content-Type"],
+  allowedHeaders:'*',
 };
 
 dotenv.config();
