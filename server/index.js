@@ -1,20 +1,19 @@
 import express from "express";
 import * as dotenv from "dotenv";
-// import cors from "cors";
+import cors from "cors";
 import connectDB from "./mongodb/connect.js";
 import postRoute from "./routes/PostRoute.js";
 import dalleRoute from "./routes/DalleRoute.js";
 
-// const corsOptions = {
-//   origin: "https://coolartgen.onrender.com",
-//   methods: ["GET", "POST"],
-//   allowedHeaders: ["Content-Type"],
-// };
+const corsOptions = {
+  origin: "https://coolartgen.onrender.com",
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"],
+};
 
 dotenv.config();
 const app = express();
-
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 // app.options("*", cors(corsOptions));
 app.use(express.json({ limit: "50mb" }));
 
