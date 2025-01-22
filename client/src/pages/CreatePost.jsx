@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { preview } from "../assets";
 import { getRandomPrompt } from "../utils";
-import { FormField, Loader, DarkmodeButton } from "../components";
+import { FormField, Loader} from "../components";
 
 const CreatePost = () => {
   const navigate = useNavigate();
@@ -12,10 +12,9 @@ const CreatePost = () => {
     prompt: " ",
     photo: false,
   });
-  console.log(form.name);
+  
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [darkMode, setDarkmode] = useState(false);
 
   const generateImage = async () => {
     if (form.prompt) {
@@ -80,9 +79,6 @@ const CreatePost = () => {
     console.log(randomPrompt);
   };
 
-  const toggleDarkMode = () => {
-    setDarkmode(!darkMode);
-  };
 
   return (
     <div className={`${darkMode && "dark"}`}>
@@ -93,7 +89,7 @@ const CreatePost = () => {
             Generate AI Image
           </h1>
           <p className="mt-2 text-gray-50 text-[16px] max-w[500px]">
-            Creeate a imaginative image and share with the Community.
+            Create a imaginative image and share with the Community.
           </p>
         </div>
         <form className="mt-16 max-w-3xl drop-shadow-xl" onSubmit={handleSubmit}>
