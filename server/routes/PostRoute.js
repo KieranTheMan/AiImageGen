@@ -1,15 +1,9 @@
-import cors from 'cors';
 import express from "express";
 import * as dotenv from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
 
 import Post from "../mongodb/models/post.js";
 
-const corsOptions = {
-  origin: "https://coolartgen.onrender.com"
-};
-const app = express();
-app.use(cors(corsOptions));
 dotenv.config();
 const router = express.Router();
 
@@ -18,7 +12,7 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
-
+app.use(cors(corsOptions));
 //get all posts
 
 router.route("/").get(async (req, res) => {
