@@ -8,7 +8,7 @@ import Post from "../mongodb/models/post.js";
 const corsOptions = {
   origin: "https://coolartgen.onrender.com"
 };
-
+const app = express();
 app.use(cors(corsOptions));
 dotenv.config();
 const router = express.Router();
