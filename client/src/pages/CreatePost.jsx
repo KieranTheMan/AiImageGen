@@ -49,7 +49,7 @@ const CreatePost = () => {
       setLoading(true);
 
       try {
-        const response = await fetch("https://aiimagegen-571e.onrender.com/api/v1/dalle", {
+        const response = await fetch("https://aiimagegen-571e.onrender.com/api/v1/post", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -81,7 +81,7 @@ const CreatePost = () => {
 
 
   return (
-    <div className={`${darkMode && "dark"}`}>
+    <div>
       <section className="max-w-7xl mx-auto">
         
         <div>
