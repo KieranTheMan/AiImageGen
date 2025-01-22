@@ -6,13 +6,12 @@ import postRoute from "./routes/PostRoute.js";
 import dalleRoute from "./routes/DalleRoute.js";
 
 const corsOptions = {
-  origin: "https://coolartgen.onrender.com",
-  methods: ["GET", "POST"],
-  allowedHeaders: ["Content-Type"],
+  origin: "https://coolartgen.onrender.com"
 };
 
-const app = express();
 dotenv.config();
+const app = express();
+
 app.use(cors(corsOptions));
 app.use(express.json({ limit: "50mb" }));
 
@@ -26,9 +25,9 @@ app.get("/", async (req, res) => {
 const startServer = async () => {
   try {
     connectDB(process.env.MONGODB_URL);
-    // app.listen(8000, () =>
-    //   console.log("Server has started on port http://localhost:8000")
-    // );
+    app.listen(8000, () =>
+    console.log("Server has started on port http://localhost:8000")
+    );
   } catch (error) {
     console.log(error);
   }
