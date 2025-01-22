@@ -6,7 +6,9 @@ import postRoute from "./routes/PostRoute.js";
 import dalleRoute from "./routes/DalleRoute.js";
 
 const corsOptions = {
-  origin: "https://coolartgen.onrender.com"
+  origin: "*",
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"],
 };
 
 dotenv.config();
