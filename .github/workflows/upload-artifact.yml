@@ -1,0 +1,17 @@
+name: Upload Production Build Artifact
+on:
+  push:
+    branches:
+      - main
+jobs:
+  upload-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Upload production-ready build files
+        # This action saves the build directory as an artifact.
+        uses: actions/upload-artifact@v4
+        with:
+          name: react-build-artifact
+          path: dist/
