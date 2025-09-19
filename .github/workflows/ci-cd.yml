@@ -1,0 +1,45 @@
+# Workflow for a React.js application
+name: aiimagegen CI/CD Pipeline
+
+# This workflow is triggered on pull requests to the main branch
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build_and_test:
+    name: Build and Test React App
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        # This action checks out your repository code so the workflow can access it.
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        # This action sets up the specified version of Node.js.
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        # 'npm ci' is preferred in CI environments for clean installations.
+        run: npm ci
+
+      - name: Run ESLint
+        # This step runs your linter to check for code style and syntax issues.
+        # Ensure you have a 'lint' script in your package.json.
+        run: npm run lint
+
+      - name: Build React app
+        # This step creates a production-ready build of your React app.
+        run: npm run build
+
+      - name: Upload production-ready build files
+        # This action saves the build directory as an artifact.
+        # This artifact can be used by a later deployment job without rebuilding.
+        uses: actions/upload-artifact@v3
+        with:
+          name: react-build-artifact
+          path: dist/  # NOTE: Vite outputs to a 'dist' directory, not 'build'
