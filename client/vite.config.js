@@ -7,5 +7,6 @@ export default defineConfig({
   define: {
     global: 'globalThis',
     setImmediate: 'setTimeout',
+    MSApp: 'undefined'
   },
 })

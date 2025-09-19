@@ -8,8 +8,8 @@ import { FormField, Loader} from "../components";
 const CreatePost = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    name: " ",
-    prompt: " ",
+    name: "",
+    prompt: "",
     photo: false,
   });
   
@@ -38,7 +38,7 @@ const CreatePost = () => {
       } finally {
         setGeneratingImg(false);
       }
-    } else if(!form.prompt) {
+    } else {
       alert("Please enter prompt");
     }
   };
