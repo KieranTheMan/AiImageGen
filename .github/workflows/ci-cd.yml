@@ -19,11 +19,11 @@ jobs:
     steps:
       - name: Checkout code
         # This action checks out your repository code so the workflow can access it.
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         # This action sets up the specified version of Node.js.
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
@@ -42,7 +42,7 @@ jobs:
       - name: Upload production-ready build files
         # This action saves the build directory as an artifact.
         # This artifact can be used by a later deployment job without rebuilding.
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: react-build-artifact
           path: dist/
