@@ -1,4 +1,3 @@
-import React from "react";
 //layoutpages
 import Default from "../layout/default";
 
