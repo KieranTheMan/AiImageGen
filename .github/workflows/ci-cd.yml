@@ -30,14 +30,17 @@ jobs:
       - name: Install dependencies
         # 'npm ci' is preferred in CI environments for clean installations.
         run: npm ci
+        working-directory: client
 
       - name: Run ESLint
         # This step runs your linter to check for code style and syntax issues.
         run: npm run lint
+        working-directory: client
 
       - name: Build React app
         # This step creates a production-ready build of your React app.
         run: npm run build
+        working-directory: client
 
       - name: Upload production-ready build files
         # This action saves the build directory as an artifact.
@@ -45,4 +48,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: react-build-artifact
-          path: dist/
+          path: client/dist/
