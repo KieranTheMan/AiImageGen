@@ -1,4 +1,5 @@
 # Workflow for a React.js application
+
 name: aiimagegen CI/CD Pipeline
 
 # This workflow is triggered on pull requests to the main branch
@@ -6,10 +7,13 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
 
 jobs:
   build_and_test:
-    name: Build and Test React App
+    name: Build and Lint React App
     runs-on: ubuntu-latest
 
     steps:
@@ -29,7 +33,6 @@ jobs:
 
       - name: Run ESLint
         # This step runs your linter to check for code style and syntax issues.
-        # Ensure you have a 'lint' script in your package.json.
         run: npm run lint
 
       - name: Build React app
@@ -42,4 +45,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: react-build-artifact
-          path: dist/  # NOTE: Vite outputs to a 'dist' directory, not 'build'
+          path: dist/
