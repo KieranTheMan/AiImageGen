@@ -36,7 +36,7 @@ const CreatePost = () => {
         alert(error);
         console.log(error);
       } finally {
-        setGeneratingImg();
+        setGeneratingImg(false);
       }
     } else if(!form.prompt) {
       alert("Please enter prompt");
