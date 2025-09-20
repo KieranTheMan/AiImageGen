@@ -17,21 +17,9 @@ jobs:
       - name: 'Checkout Repository'
         uses: actions/checkout@v4
 
-      - name: 'Dependency Review Client'
+      - name: 'Dependency Review'
         uses: actions/dependency-review-action@v4
         with:
-          base-directory: 'client'
-          # Scanning for vulnerabilities
-          vulnerability-check: true
-          # Fail on high severity issues
-          fail-on-severity: high
-          # Add PR comment summary
-          comment-summary-in-pr: true
-
-      - name: 'Dependency Review Server'
-        uses: actions/dependency-review-action@v4
-        with:
-          base-directory: 'server'
           # Scanning for vulnerabilities
           vulnerability-check: true
           # Fail on high severity issues
