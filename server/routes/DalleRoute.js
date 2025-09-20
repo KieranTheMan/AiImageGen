@@ -25,11 +25,13 @@ router.route("/").post(async (req, res) => {
       //response_format:'b64_json'
   });
     const image = aiResponse.data[0].url;
-    console.log(aiResponse)
+    // eslint-disable-next-line no-console
+    console.log("DALL-E response:", aiResponse);
     res.status(200).json({ photo: image });
   } catch (error) {
-    console.log(error);
-    res.status(500).send(error?.response.data.error.message);
+    // eslint-disable-next-line no-console
+    console.error("DALL-E API error:", error);
+    res.status(500).send(error?.response?.data?.error?.message || "Image generation failed");
   }
 });
 

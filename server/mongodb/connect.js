@@ -5,8 +5,14 @@ const connectDB = (url) => {
 
   mongoose
     .connect(url)
-    .then(() => console.log("MongoDB connected"))
-    .catch((err) => console.log);
+    .then(() => {
+      // eslint-disable-next-line no-console
+      console.log("MongoDB connected");
+    })
+    .catch((error) => {
+      // eslint-disable-next-line no-console
+      console.error("MongoDB connection error:", error);
+    });
 };
 
 export default connectDB;
