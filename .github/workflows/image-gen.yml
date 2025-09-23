@@ -1,4 +1,4 @@
-name: Full-Stack CI/CD Pipeline
+name: ImageGen CI/CD Pipeline
 
 on:
   pull_request:
@@ -32,6 +32,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+      
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install root dependencies (Jest and test tools)
         run: npm ci
