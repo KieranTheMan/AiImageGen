@@ -3,8 +3,18 @@ name: "CodeQL Analysis"
 on:
   push:
     branches: [ "main" ]
+    paths-ignore:
+      - "node_modules/**"
+      - "coverage/**"
+      - "**/*.test.js"
+      - "**/*.test.jsx"
   pull_request:
     branches: [ "main" ]
+    paths-ignore:
+      - "node_modules/**"
+      - "coverage/**"
+      - "**/*.test.js"
+      - "**/*.test.jsx"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

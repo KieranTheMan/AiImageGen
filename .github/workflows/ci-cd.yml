@@ -35,6 +35,7 @@ jobs:
 
       - name: Install root dependencies (Jest and test tools)
         run: npm ci
+        working-directory: .
 
       - name: Install client dependencies
         run: npm ci
@@ -46,6 +47,7 @@ jobs:
 
       - name: Run Jest tests with coverage on client
         run: npm run test:coverage -- --selectProjects=client
+        working-directory: .
 
       - name: Build client
         run: npm run build
@@ -83,6 +85,7 @@ jobs:
 
       - name: Install root dependencies (Jest and test tools)
         run: npm ci
+        working-directory: .
 
       - name: Install server dependencies
         run: npm ci
@@ -97,7 +100,8 @@ jobs:
 
       - name: Run Jest tests with coverage on server
         run: npm run test:coverage -- --selectProjects=server
-      
+        working-directory: .
+        
       - name: Upload server coverage reports  
         uses: actions/upload-artifact@v4
         with:
