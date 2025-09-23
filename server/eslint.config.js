@@ -18,5 +18,23 @@ export default [
       "no-console": "warn",
       "prefer-const": "warn"
     }
+  },
+  {
+    files: ["**/*.test.js", "**/tests/**/*.js"],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: {
+        ...globals.node,
+        ...globals.jest
+      }
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      "no-unused-vars": "warn",
+      "no-undef": "error",
+      "no-console": "warn",
+      "prefer-const": "warn"
+    }
   }
 ];

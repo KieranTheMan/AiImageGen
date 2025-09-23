@@ -135,7 +135,7 @@ describe('Server Validation Logic', () => {
         }
 
         const missing = requiredFields.filter(field =>
-          !data.hasOwnProperty(field) ||
+          !Object.prototype.hasOwnProperty.call(data, field) ||
           data[field] === null ||
           data[field] === undefined ||
           (typeof data[field] === 'string' && data[field].trim() === '')

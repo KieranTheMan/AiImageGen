@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Home from '../../src/pages/Home';
@@ -6,7 +5,7 @@ import Home from '../../src/pages/Home';
 // Mock the components
 jest.mock('../../src/components', () => ({
   Loader: () => <div data-testid="loader">Loading...</div>,
-  Card: ({ _id, name, prompt, photo }) => (
+  Card: ({ _id, name, prompt }) => (
     <div data-testid={`card-${_id}`}>
       <span>{name}</span>
       <span>{prompt}</span>

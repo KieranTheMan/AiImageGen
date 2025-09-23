@@ -1,5 +1,4 @@
-// Import React and testing utilities
-import React from 'react';
+// Import testing utilities
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Card from '../../src/components/Card';
