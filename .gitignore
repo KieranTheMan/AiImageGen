@@ -1,0 +1,17 @@
+# Dependency directories
+node_modules/
+
+# Production builds and logs
+*.log
+
+# Environment variables
+.env
+.env.local
+
+# IDE files
+.vscode/
+.idea/
+.claude
+
+# Operating system files
+.DS_Store
