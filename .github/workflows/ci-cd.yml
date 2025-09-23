@@ -41,9 +41,20 @@ jobs:
         run: npm run lint
         working-directory: client
 
+      - name: Run Jest tests with coverage on client
+        run: npm run test:coverage -- --selectProjects=client
+
       - name: Build client
         run: npm run build
         working-directory: client
+
+      - name: Upload client coverage reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: client-coverage
+          path: coverage/
+          retention-days: 7
+        if: always()
 
       - name: Upload client build artifact
         uses: actions/upload-artifact@v4
@@ -74,6 +85,20 @@ jobs:
       - name: Run ESLint on server
         run: npm run lint
         working-directory: server
+
+      - name: Run Jest tests on server
+        run: npm run test:server
+
+      - name: Run Jest tests with coverage on server
+        run: npm run test:coverage -- --selectProjects=server
+      
+      - name: Upload server coverage reports  
+        uses: actions/upload-artifact@v4
+        with:
+          name: server-coverage
+          path: coverage/
+          retention-days: 7
+        if: always()
 
       # Log in to a container registry Docker Hub or GitHub Packages
       - name: Login to Container Registry
