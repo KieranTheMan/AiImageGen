@@ -1,0 +1,25 @@
+# Dependency Review Configuration
+
+# OpenSSF Scorecard configuration
+fail-on-openssf-scorecard-threshold: 2.0
+
+# Allow these specific packages with lower scores, they are widely used and maintained
+allow-dependencies-licenses:
+  - MIT
+  - Apache-2.0
+  - BSD-2-Clause
+  - BSD-3-Clause
+  - ISC
+
+# Only fail on runtime dependencies, not dev dependencies
+fail-on-scopes:
+  - runtime
+
+# Allow these specific packages that have lower OpenSSF scores but are essential
+allow-dependencies:
+  - uri-js
+  - type-check
+  - prelude-ls
+  - levn
+  - isexe
+  - cross-spawn

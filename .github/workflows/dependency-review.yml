@@ -22,6 +22,8 @@ jobs:
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@v4.8.0 
         with:
+          # Use configuration file for detailed settings
+          config-file: .github/dependency-review-config.yml
           # Scanning for vulnerabilities
           vulnerability-check: true
           # Fail on high severity issues
