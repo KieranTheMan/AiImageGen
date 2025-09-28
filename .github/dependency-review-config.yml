@@ -1,5 +1,11 @@
 # Dependency Review Configuration
+# Vulnerability settings
+fail_on_severity: 'high'           # Options: low, moderate, high, critical
+vulnerability_check: true          # Enable/disable vulnerability checking
+warn_only: false                   # Set to true to only warn, not fail
 
+# License settings (choose ONE - allow_licenses OR deny_licenses)
+license_check: true  
 # OpenSSF Scorecard configuration
 fail-on-openssf-scorecard-threshold: 2.0
 
