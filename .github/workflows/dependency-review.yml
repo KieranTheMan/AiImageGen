@@ -9,6 +9,8 @@ concurrency:
 permissions:
   contents: read
   pull-requests: write
+  security-events: write
+  actions: read
 
 jobs:
   dependency-review:
@@ -20,6 +22,7 @@ jobs:
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@v4
         with:
+          repo-token: ${{ secrets.DEPENDENCY_REVIEW_TOKEN }}
           # Scanning for vulnerabilities
           vulnerability-check: true
           # Fail on high severity issues
