@@ -22,7 +22,6 @@ jobs:
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@v4
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
           # Scanning for vulnerabilities
           vulnerability-check: true
           # Fail on high severity issues
