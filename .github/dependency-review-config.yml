@@ -29,3 +29,4 @@ allow_dependencies_licenses:
   - 'pkg:npm/levn'
   - 'pkg:npm/isexe'
   - 'pkg:npm/cross-spawn'
+  - 'pkg:npm/gensync'
