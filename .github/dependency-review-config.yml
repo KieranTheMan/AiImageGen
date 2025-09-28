@@ -1,7 +1,7 @@
 # Dependency Review Configuration
 
 # Vulnerability settings
-fail_on_severity: 'high'
+fail_on_severity: high
 vulnerability_check: true
 
 # License settings - use allow_licenses
