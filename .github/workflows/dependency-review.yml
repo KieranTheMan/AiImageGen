@@ -24,9 +24,4 @@ jobs:
         with:
           # Use configuration file for detailed settings
           config-file: .github/dependency-review-config.yml
-          # Scanning for vulnerabilities
-          vulnerability-check: true
-          # Fail on high severity issues
-          fail-on-severity: high
-          # Add PR comment summary
-          comment-summary-in-pr: always
+          
