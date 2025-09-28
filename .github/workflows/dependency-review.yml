@@ -10,11 +10,7 @@ permissions:
   # read the repository's code/dependencies
   contents: read 
   # write the summary comment on the pull request
-  pull-requests: write 
-  # upload results to the security tab
-  security-events: write
-  # run the action
-  actions: read
+  pull-requests: write
 
 jobs:
   dependency-review:
@@ -24,11 +20,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 'Dependency Review'
-        uses: actions/dependency-review-action@v4
+        uses: actions/dependency-review-action@v4.8.0 
         with:
           # Scanning for vulnerabilities
           vulnerability-check: true
           # Fail on high severity issues
           fail-on-severity: high
           # Add PR comment summary
-          comment-summary-in-pr: false
+          comment-summary-in-pr: always
