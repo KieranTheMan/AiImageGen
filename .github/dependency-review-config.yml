@@ -14,7 +14,7 @@ allow_licenses:
   - 'ISC'
 
 # OpenSSF Scorecard configuration
-show_openssf_scorecard: true
+show_openssf_scorecard: false
 warn_on_openssf_scorecard_level: 2  # Only warn if score below 2.0
 
 # Only fail on runtime dependencies
