@@ -1,31 +1,30 @@
 # Dependency Review Configuration
+
 # Vulnerability settings
-fail_on_severity: 'high'           # Options: low, moderate, high, critical
-vulnerability_check: true          # Enable/disable vulnerability checking
-warn_only: false                   # Set to true to only warn, not fail
+fail_on_severity: 'high'
+vulnerability_check: true
 
-# License settings (choose ONE - allow_licenses OR deny_licenses)
-license_check: true  
-# OpenSSF Scorecard configuration
-fail-on-openssf-scorecard-threshold: 2.0
-
-# Allow these specific packages with lower scores, they are widely used and maintained
-allow-dependencies-licenses:
+# License settings - use allow_licenses instead of allow-dependencies-licenses
+license_check: true
+allow_licenses:
   - MIT
   - Apache-2.0
   - BSD-2-Clause
   - BSD-3-Clause
   - ISC
 
+# OpenSSF Scorecard configuration
+fail_on_openssf_scorecard_threshold: 2.0
+
 # Only fail on runtime dependencies, not dev dependencies
-fail-on-scopes:
+fail_on_scopes:
   - runtime
 
-# Allow these specific packages that have lower OpenSSF scores but are essential
-allow-dependencies:
-  - uri-js
-  - type-check
-  - prelude-ls
-  - levn
-  - isexe
-  - cross-spawn
+# Allow these specific packages with lower OpenSSF scores (using package URLs)
+allow_dependencies:
+  - pkg:npm/uri-js
+  - pkg:npm/type-check
+  - pkg:npm/prelude-ls
+  - pkg:npm/levn
+  - pkg:npm/isexe
+  - pkg:npm/cross-spawn
