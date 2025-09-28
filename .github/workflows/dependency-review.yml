@@ -7,9 +7,13 @@ concurrency:
   cancel-in-progress: true
 
 permissions:
-  contents: read
-  pull-requests: write
+  # read the repository's code/dependencies
+  contents: read 
+  # write the summary comment on the pull request
+  pull-requests: write 
+  # upload results to the security tab
   security-events: write
+  # run the action
   actions: read
 
 jobs:
@@ -27,4 +31,4 @@ jobs:
           # Fail on high severity issues
           fail-on-severity: high
           # Add PR comment summary
-          comment-summary-in-pr: true
+          comment-summary-in-pr: false
