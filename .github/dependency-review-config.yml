@@ -4,27 +4,28 @@
 fail_on_severity: 'high'
 vulnerability_check: true
 
-# License settings - use allow_licenses instead of allow-dependencies-licenses
+# License settings - use allow_licenses
 license_check: true
 allow_licenses:
-  - MIT
-  - Apache-2.0
-  - BSD-2-Clause
-  - BSD-3-Clause
-  - ISC
+  - 'MIT'
+  - 'Apache-2.0'
+  - 'BSD-2-Clause'
+  - 'BSD-3-Clause'
+  - 'ISC'
 
 # OpenSSF Scorecard configuration
-fail_on_openssf_scorecard_threshold: 2.0
+show_openssf_scorecard: true
+warn_on_openssf_scorecard_level: 2  # Only warn if score below 2.0
 
-# Only fail on runtime dependencies, not dev dependencies
+# Only fail on runtime dependencies
 fail_on_scopes:
-  - runtime
+  - 'runtime'
 
-# Allow these specific packages with lower OpenSSF scores (using package URLs)
-allow_dependencies:
-  - pkg:npm/uri-js
-  - pkg:npm/type-check
-  - pkg:npm/prelude-ls
-  - pkg:npm/levn
-  - pkg:npm/isexe
-  - pkg:npm/cross-spawn
+# Allow these specific packages with any license issues
+allow_dependencies_licenses:
+  - 'pkg:npm/uri-js'
+  - 'pkg:npm/type-check'
+  - 'pkg:npm/prelude-ls'
+  - 'pkg:npm/levn'
+  - 'pkg:npm/isexe'
+  - 'pkg:npm/cross-spawn'
