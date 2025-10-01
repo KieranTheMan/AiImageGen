@@ -8,6 +8,13 @@ node_modules/
 .env
 .env.local
 
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/.terraform.lock.hcl
+terraform/terraform.tfvars  # If it contains secrets
+
 # IDE files
 .vscode/
 .idea/
