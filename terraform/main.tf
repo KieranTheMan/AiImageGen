@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
         source = "hashicorp/aws"
-        version = "~ 5.0"
+        version = "~>5.0"
     }
   }
 }
@@ -12,9 +12,9 @@ provider "aws" {
 }
 
 module "ecr" {
-    source = "../modules/ecr"
+    source = "./modules/ecr"
 
     repositories = var.ecr_repositories
 
-    common_tags = var.tags
+    tags = var.tags
 }
