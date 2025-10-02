@@ -17,7 +17,7 @@ variable "ecr_repositories" {
   }))
 
   default = {
-    "Ai-Gen-App-frontend" = {
+    "ai-gen-app-frontend" = {
       image_tag_mutability = "MUTABLE"
       scan_on_push = true
       encryption_type = "AES256"
@@ -27,7 +27,7 @@ variable "ecr_repositories" {
       }
     }
 
-        "Ai-Gen-App-backend" = {
+        "ai-gen-app-backend" = {
       image_tag_mutability = "MUTABLE"
       scan_on_push = true
       encryption_type = "AES256"
