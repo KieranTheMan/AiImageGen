@@ -22,3 +22,9 @@ variable "tags" {
     Team = "DevOps"
   }
 }
+
+variable "allowed_principals" {
+  description = "List of AWS principals (users/roles) allowed to access ECR"
+  type        = list(string)
+  default     = []
+}
