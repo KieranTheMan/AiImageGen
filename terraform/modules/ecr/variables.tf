@@ -4,10 +4,10 @@ variable "repositories" {
     image_tag_mutability = string
     scan_on_push         = bool
     encryption_type      = string
-    lifecycle_policy     = optional(object({
+    lifecycle_policy     = object({
       keep_last_n_images         = number
       remove_untagged_after_days = number
-    }))
+    })
   }))
 }
 
