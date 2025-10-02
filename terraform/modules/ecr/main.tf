@@ -26,34 +26,33 @@ resource "aws_ecr_lifecycle_policy" "this" {
     }
 
     repository = aws_ecr_repository.this[each.key].name
-    policy = jsonencode({
-        rules = [
-        {
-            rulePriority = 1
-            description = "Keep last ${each.value.lifecycle_policy.keep_last_n_images} image "
-            selection ={
-                tagStatus = "any"
-                countType = "imageCountMoreThan"
-                countNumber = each.value.lifecycle_policy.keep_last_n_images
-            }
-            action = {
-                type = "expire"
-            }
+   policy = jsonencode({
+  rules = [
+    {
+      rulePriority = 1  
+      description  = "Remove untagged images after ${each.value.lifecycle_policy.remove_untagged_after_days} days"
+      selection = {
+        tagStatus   = "untagged"
+        countType   = "sinceImagePushed"
+        countUnit   = "days"
+        countNumber = each.value.lifecycle_policy.remove_untagged_after_days
+      }
+      action = {
+        type = "expire"
+      }
     },
     {
-        rulePriority = 2
-        description  = "Remove untagged images after ${each.value.lifecycle_policy.remove_untagged_after_days} days"
-        selection = {
-          tagStatus   = "untagged"
-          countType   = "sinceImagePushed"
-          countUnit   = "days"
-          countNumber = each.value.lifecycle_policy.remove_untagged_after_days
-        }
-        action = {
-          type = "expire"
-        }
+      rulePriority = 2
+      description  = "Keep last ${each.value.lifecycle_policy.keep_last_n_images} images"
+      selection = {
+        tagStatus     = "any"
+        countType     = "imageCountMoreThan"
+        countNumber   = each.value.lifecycle_policy.keep_last_n_images
+      }
+      action = {
+        type = "expire"
+      }
     }
-    
-        ]
-    })
+  ]
+})
 }
