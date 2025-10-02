@@ -52,4 +52,10 @@ variable "tags" {
   }
 }
 
+variable "allowed_principals" {
+  description = "AWS principals allowed to access ECR repositories"
+  type        = list(string)
+  default     = []
+}
+
 
