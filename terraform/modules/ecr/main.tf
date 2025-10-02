@@ -56,3 +56,34 @@ resource "aws_ecr_lifecycle_policy" "this" {
   ]
 })
 }
+
+resource "aws_ecr_repository_policy" "this" {
+  for_each = var.repositories
+
+  repository = aws_ecr_repository.this[each.key].name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid    = "AllowPushPull"
+        Effect = "Allow"
+        Principal = {
+          AWS = var.allowed_principals
+        }
+        Action = [
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:BatchGetImage",
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:PutImage",
+          "ecr:InitiateLayerUpload",
+          "ecr:UploadLayerPart",
+          "ecr:CompleteLayerUpload",
+          "ecr:DescribeRepositories",
+          "ecr:GetRepositoryPolicy",
+          "ecr:ListImages"
+        ]
+      }
+    ]
+  })
+}
