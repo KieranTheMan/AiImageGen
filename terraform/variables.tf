@@ -1,7 +1,7 @@
 variable "aws_region" {
     description = "AWS region"
     type = string
-    default = "us-east-1"
+    default = "eu-west-2"
 }
 
 variable "ecr_repositories" {
@@ -10,6 +10,10 @@ variable "ecr_repositories" {
     image_tag_mutability = string
     scan_on_push = bool
     encryption_type = string
+    lifecycle_policy = (object({
+      keep_last_images = number
+      remove_untagged_after_days = number
+    }))
   }))
 
   default = {
@@ -17,12 +21,20 @@ variable "ecr_repositories" {
       image_tag_mutability = "MUTABLE"
       scan_on_push = "true"
       encryption_type = "AES256"
+      lifecycle_policy = {
+        keep_last_images = 5
+        remove_untagged_after_days = 3
+      }
     }
 
         "Ai-Gen-App-backend" = {
       image_tag_mutability = "MUTABLE"
       scan_on_push = "true"
       encryption_type = "AES256"
+      lifecycle_policy = {
+        keep_last_images = 10
+        remove_untagged_after_days = 7
+      }
     }
   }
 
@@ -35,6 +47,8 @@ variable "tags" {
     Environment = "production"
     Project = "ai-image-gen"
     ManagedBy   = "terraform"
+    Owner = "Kieran"
+    Team = "DevOps"
   }
 }
 
