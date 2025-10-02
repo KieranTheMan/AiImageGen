@@ -26,11 +26,11 @@ resource "aws_ecr_lifecycle_policy" "this" {
     }
 
     repository = aws_ecr_repository.this[each.key].name
-    policy = jsondecode({
+    policy = jsonencode({
         rules = [
         {
-            rulePrority = 1
-            discription = "Keep last ${each.value.lifecycle_policy.keep_last_image} image "
+            rulePriority = 1
+            description = "Keep last ${each.value.lifecycle_policy.keep_last_n_images} image "
             selection ={
                 tagStatus = "any"
                 countType = "imageCountMoreThan"
