@@ -10,29 +10,29 @@ variable "ecr_repositories" {
     image_tag_mutability = string
     scan_on_push = bool
     encryption_type = string
-    lifecycle_policy = (object({
-      keep_last_images = number
+    lifecycle_policy = object({
+      keep_last_n_images = number
       remove_untagged_after_days = number
-    }))
+    })
   }))
 
   default = {
     "Ai-Gen-App-frontend" = {
       image_tag_mutability = "MUTABLE"
-      scan_on_push = "true"
+      scan_on_push = true
       encryption_type = "AES256"
       lifecycle_policy = {
-        keep_last_images = 5
+        keep_last_n_images = 5
         remove_untagged_after_days = 3
       }
     }
 
         "Ai-Gen-App-backend" = {
       image_tag_mutability = "MUTABLE"
-      scan_on_push = "true"
+      scan_on_push = true
       encryption_type = "AES256"
       lifecycle_policy = {
-        keep_last_images = 10
+        keep_last_n_images = 10
         remove_untagged_after_days = 7
       }
     }
