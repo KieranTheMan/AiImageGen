@@ -12,9 +12,9 @@ provider "aws" {
 }
 
 module "ecr" {
-    source = "./modules/ecr"
+  source = "./modules/ecr"
 
-    repositories = var.ecr_repositories
-
-    tags = var.tags
+  repositories        = var.ecr_repositories
+  tags                = var.tags
+  allowed_principals  = var.allowed_principals
 }
