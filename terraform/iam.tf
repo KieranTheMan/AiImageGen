@@ -30,7 +30,8 @@ resource "aws_iam_role" "github_actions" {
             # Token must be from main or develop branch
             "token.actions.githubusercontent.com:sub" = [
               "repo:KieranTheMan/AiImageGen:ref:refs/heads/main",
-              "repo:KieranTheMan/AiImageGen:ref:refs/heads/develop"
+              "repo:KieranTheMan/AiImageGen:ref:refs/heads/develop",
+              "repo:KieranTheMan/AiImageGen:pull_request"
             ]
           }
         }
