@@ -76,10 +76,10 @@ jobs:
           path: client/dist/
 
   # ----------------------------------------------------
-  # Job 2: Build and Push the Server Docker Image
+  # Job 2: Build and Test the Server (Node.js/Express)
   # ----------------------------------------------------
-  server_build_and_push:
-    name: Build & Push Server
+  server_build_and_test:
+    name: Build & Test Server
     runs-on: ubuntu-latest
 
     steps:
@@ -90,6 +90,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+      
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install root dependencies (Jest and test tools)
         run: npm ci
@@ -103,14 +111,11 @@ jobs:
         run: npm run lint
         working-directory: server
 
-      - name: Run Jest tests on server
-        run: npm run test:server
-
       - name: Run Jest tests with coverage on server
         run: npm run test:coverage -- --selectProjects=server
         working-directory: .
-        
-      - name: Upload server coverage reports  
+
+      - name: Upload server coverage reports
         uses: actions/upload-artifact@v4
         with:
           name: server-coverage
@@ -118,34 +123,66 @@ jobs:
           retention-days: 7
         if: always()
 
-        # Log in to AWS ECR
+  # ----------------------------------------------------
+  # Job 3: Build and Push Docker Images to ECR
+  # ----------------------------------------------------
+  build_and_push_images:
+    name: Build & Push Docker Images
+    runs-on: ubuntu-latest
+    needs: [client_build_and_test, server_build_and_test]
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Configure AWS credentials using OIDC
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: arn:aws:iam::966821290687:role/github-actions-role
+          aws-region: eu-west-2
 
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+        uses: aws-actions/amazon-ecr-login@v2
 
-    # Build and push the Docker image to ECR
-      - name: Build and push server image
-        uses: docker/build-push-action@v4
-        with:
-          context: server/
-          push: false
-          tags: ${{ secrets.ECR_REGISTRY }}/aiimagegen-server:latest
-      
+      # Build and push frontend image
+      - name: Build and push frontend image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ai-gen-app-frontend
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
+                       -t $ECR_REGISTRY/$ECR_REPOSITORY:latest \
+                       -f client/dockerfile client/
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+      # Build and push backend image
+      - name: Build and push backend image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ai-gen-app-backend
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
+                 -t $ECR_REGISTRY/$ECR_REPOSITORY:latest \
+                 -f server/dockerfile server/
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
 
   # ----------------------------------------------------
-  # Job 3: Deploy the Full-Stack Application
+  # Job 4: Deploy the Full-Stack Application
   # ----------------------------------------------------
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    needs: [client_build_and_test, server_build_and_push]
+    needs: [client_build_and_test, server_build_and_test, build_and_push_images]
     permissions:
       contents: read
 
