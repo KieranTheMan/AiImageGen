@@ -1,0 +1,80 @@
+name: "CodeQL Analysis"
+
+on:
+  push:
+    branches: [ "main" ]
+    paths-ignore:
+      - "node_modules/**"
+      - "coverage/**"
+      - "**/*.test.js"
+      - "**/*.test.jsx"
+  pull_request:
+    branches: [ "main" ]
+    paths-ignore:
+      - "node_modules/**"
+      - "coverage/**"
+      - "**/*.test.js"
+      - "**/*.test.jsx"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+  
+jobs:
+  # ----------------------------------------------------
+  # Job 1: Analyze the Client (React) Code
+  # ----------------------------------------------------
+  client_analyze:
+    name: Analyze Client
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Initialize CodeQL for Client
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+          source-root: client
+
+      - name: Autobuild Client
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis for Client
+        uses: github/codeql-action/analyze@v3
+
+  # ----------------------------------------------------
+  # Job 2: Analyze the Server (Node.js) Code
+  # ----------------------------------------------------
+  server_analyze:
+    name: Analyze Server
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Initialize CodeQL for Server
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+          source-root: server
+
+      - name: Autobuild Server
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis for Server
+        uses: github/codeql-action/analyze@v3

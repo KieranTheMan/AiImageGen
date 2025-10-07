@@ -1,0 +1,27 @@
+name: "Dependency Review"
+
+on: [pull_request]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  # read the repository's code/dependencies
+  contents: read 
+  # write the summary comment on the pull request
+  pull-requests: write
+
+jobs:
+  dependency-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v4
+
+      - name: 'Dependency Review'
+        uses: actions/dependency-review-action@v4.8.0 
+        with:
+          # Use configuration file for detailed settings
+          config-file: .github/dependency-review-config.yml
+          comment-summary-in-pr: always

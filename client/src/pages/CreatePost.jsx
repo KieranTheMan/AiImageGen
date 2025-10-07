@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { preview } from "../assets";
@@ -8,8 +8,8 @@ import { FormField, Loader} from "../components";
 const CreatePost = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    name: " ",
-    prompt: " ",
+    name: "",
+    prompt: "",
     photo: false,
   });
   
@@ -36,9 +36,9 @@ const CreatePost = () => {
         alert(error);
         console.log(error);
       } finally {
-        setGeneratingImg();
+        setGeneratingImg(false);
       }
-    } else if(!form.prompt) {
+    } else {
       alert("Please enter prompt");
     }
   };

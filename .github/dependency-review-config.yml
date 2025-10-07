@@ -1,0 +1,32 @@
+# Dependency Review Configuration
+
+# Vulnerability settings
+fail_on_severity: high
+vulnerability_check: true
+
+# License settings - use allow_licenses
+license_check: true
+allow_licenses:
+  - 'MIT'
+  - 'Apache-2.0'
+  - 'BSD-2-Clause'
+  - 'BSD-3-Clause'
+  - 'ISC'
+
+# OpenSSF Scorecard configuration
+show_openssf_scorecard: true
+warn_on_openssf_scorecard_level: 2  # Only warn if score below 2.0
+
+# Only fail on runtime dependencies
+fail_on_scopes:
+  - 'runtime'
+
+# Allow these specific packages with any license issues
+allow_dependencies_licenses:
+  - 'pkg:npm/uri-js'
+  - 'pkg:npm/type-check'
+  - 'pkg:npm/prelude-ls'
+  - 'pkg:npm/levn'
+  - 'pkg:npm/isexe'
+  - 'pkg:npm/cross-spawn'
+  - 'pkg:npm/gensync'

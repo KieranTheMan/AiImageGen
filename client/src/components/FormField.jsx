@@ -1,5 +1,3 @@
-import React from "react";
-
 const FormField = ({
   labelName,
   type,
@@ -10,7 +8,6 @@ const FormField = ({
   isSurpriseMe,
   handleSurpriseMe,
 }) => {
-  console.log(placeholder);
   return (
     <div>
       <div className="block items-center gap-2 mb-2">
