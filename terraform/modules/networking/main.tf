@@ -151,9 +151,9 @@ resource "aws_security_group" "alb" {
 resource "aws_security_group" "ecs_tasks" {
   name_prefix = "${var.project_name}-ecs-sg"
   description = "Security Group for ECS Tasks"
-  vpc_id = aws_vpc.main
+  vpc_id = aws_vpc.main.id
 
-  ingress = {
+  ingress {
     from_port = 0
     to_port = 65535
     protocol = "tcp"
@@ -161,11 +161,11 @@ resource "aws_security_group" "ecs_tasks" {
     description = "Allows All traffic from ALB"
   }
 
-  egress = {
+  egress {
     from_port = 0
     to_port = 0
     protocol = "-1"
-    cidr_block= ["0.0.0.0/0"]
+    cidr_blocks= ["0.0.0.0/0"]
     description = "Allow all outbound traffic"
   }
   
