@@ -36,7 +36,7 @@ variable "memory" {
 variable "desired_count" {
   description = "Desired number of tasks"
   type        = number
-  default     = 2
+  default     = 1
 }
 
 variable "min_tasks" {
@@ -48,13 +48,13 @@ variable "min_tasks" {
 variable "max_tasks" {
   description = "Maximum number of tasks for auto scaling"
   type        = number
-  default     = 10
+  default     = 2
 }
 
 variable "cpu_target_value" {
   description = "Target CPU utilization percentage for auto scaling"
   type        = number
-  default     = 70
+  default     = 60
 }
 
 variable "memory_target_value" {
