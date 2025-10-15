@@ -1,5 +1,3 @@
-# modules/ecs-cluster/main.tf
-
 # ECS Cluster
 resource "aws_ecs_cluster" "main" {
   name = var.cluster_name
