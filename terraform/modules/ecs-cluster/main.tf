@@ -134,7 +134,8 @@ resource "aws_autoscaling_group" "ecs" {
   desired_capacity    = var.desired_capacity
   health_check_type   = "EC2"
   health_check_grace_period = 300
-
+  protect_from_scale_in = true
+  
   launch_template {
     id      = aws_launch_template.ecs.id
     version = "$Latest"
