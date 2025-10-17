@@ -1,5 +1,3 @@
-# modules/iam-roles/main.tf
-
 # IAM Role for ECS Task Execution
 resource "aws_iam_role" "ecs_task_execution" {
   name = "${var.cluster_name}-ecs-task-execution-role"
@@ -23,4 +21,55 @@ resource "aws_iam_role" "ecs_task_execution" {
 resource "aws_iam_role_policy_attachment" "ecs_task_execution_role" {
   role       = aws_iam_role.ecs_task_execution.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}
+
+# SSM Parameter Store access
+resource "aws_iam_role_policy" "ssm_access" {
+  name = "${var.cluster_name}-ssm-access"
+  role = aws_iam_role.ecs_task_execution.name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "ssm:GetParameters",
+          "ssm:GetParameter",
+          "ssm:GetParameterHistory"
+        ]
+        Resource = [
+          "arn:aws:ssm:*:*:parameter/prod/*"
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "kms:Decrypt"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+# CloudWatch Logs permissions
+resource "aws_iam_role_policy" "cloudwatch_logs" {
+  name = "${var.cluster_name}-cloudwatch-logs"
+  role = aws_iam_role.ecs_task_execution.name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
 }
