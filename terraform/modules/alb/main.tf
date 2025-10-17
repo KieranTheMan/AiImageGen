@@ -1,5 +1,3 @@
-# modules/alb/main.tf
-
 # Application Load Balancer
 resource "aws_lb" "main" {
   name               = "${var.name}-alb"
