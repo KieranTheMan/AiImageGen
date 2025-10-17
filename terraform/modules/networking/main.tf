@@ -14,7 +14,7 @@ resource "aws_vpc" "main" {
 }
 
 # Internet Gateway
-resource "aws_internt_gateway" "main" {
+resource "aws_internet_gateway" "main" {
    vpc_id = aws_vpc.main.id
 
    tags = merge(
@@ -91,7 +91,7 @@ resource "aws_route_table" "private" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.project_name}-private-rt-${count.index + 1}"
+      Name = "${var.project_name}-private-rt"
     }
   )
 }
