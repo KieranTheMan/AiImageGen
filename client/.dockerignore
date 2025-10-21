@@ -1,20 +1,36 @@
+# Dependencies
 node_modules
 npm-debug.log
-.env
-.env.local
-.env.development
-.env.production
+
+# Testing
+coverage
+.nyc_output
+*.test.js
+*.test.jsx
+tests
+
+# Development
 .git
 .gitignore
 .dockerignore
-*.md
-README.md
-tests
-dist
-coverage
+.env
+.env.local
+.env.development
+.env.test
 .vscode
-.claude
 .idea
+.claude
+
+# Build (not needed in build stage)
+dist
+
+# Documentation
+README.md
+*.md
+
+# Misc
+.DS_Store
+Thumbs.db
 *.log
 .eslintrc
 eslint.config.js

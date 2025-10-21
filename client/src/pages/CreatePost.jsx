@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { preview } from "../assets";
 import { getRandomPrompt } from "../utils";
 import { FormField, Loader} from "../components";
+import { API_ENDPOINTS } from "../config";
 
 const CreatePost = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const CreatePost = () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
-        const response = await fetch("https://aiimagegen-571e.onrender.com/api/v1/dalle", {
+        const response = await fetch(API_ENDPOINTS.DALLE, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -49,7 +50,7 @@ const CreatePost = () => {
       setLoading(true);
 
       try {
-        const response = await fetch("https://aiimagegen-571e.onrender.com/api/v1/post", {
+        const response = await fetch(API_ENDPOINTS.POST, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
