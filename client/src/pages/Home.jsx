@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Loader, Card, FormField } from "../components";
 import { title } from "../assets";
-
+import { API_ENDPOINTS } from '../config'
 const RenderCards = ({ data, title }) => {
   return data?.length > 0 ? (
     data.map((post) => <Card key={post._id} {...post} />)
@@ -22,7 +22,7 @@ const Home = () => {
     const fetchPosts = async () => {
       setLoading(true);
       try {
-        const response = await fetch("https://aiimagegen-571e.onrender.com/api/v1/post", {
+        const response = await fetch(API_ENDPOINTS.POST, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
