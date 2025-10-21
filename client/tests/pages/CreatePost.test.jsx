@@ -118,7 +118,7 @@ describe('CreatePost Component', () => {
     fireEvent.click(generateButton);
     
     expect(fetch).toHaveBeenCalledWith(
-      'https://aiimagegen-571e.onrender.com/api/v1/dalle',
+      '/api/v1/dalle',
       expect.objectContaining({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
