@@ -26,6 +26,20 @@ global.console = {
   warn: jest.fn(),   // Prevents console.warn from showing in tests
 };
 
+//Mock the config module to avoid import.meta issues in tests
+jest.mock('../src/config', () => ({
+  API_ENDPOINTS: {
+    BASE_URL: '/api/v1',
+    DALLE: '/api/v1/dalle',
+    POST: '/api/v1/post',
+  },
+  default: {
+    BASE_URL: '/api/v1',
+    DALLE: '/api/v1/dalle',
+    POST: '/api/v1/post',
+  }
+}));
+
 // Mock fetch globally - this will be used by all tests
 global.fetch = jest.fn();
 
