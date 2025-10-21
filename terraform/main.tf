@@ -137,5 +137,16 @@ module "backend_service" {
   depends_on = [module.ecs_cluster]
 }
 
+# Route 53 Module
+module "route53" {
+  source = "./modules/route53"
+
+  domain_name             = var.domain_name
+  create_hosted_zone      = var.create_hosted_zone
+  alb_dns_name            = module.alb.alb_dns_name
+  alb_zone_id             = module.alb.alb_zone_id
+  tags                    = var.tags
+}
+
 
 
