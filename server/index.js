@@ -8,13 +8,15 @@ import connectDB from "./mongodb/connect.js";
 import postRoute from "./routes/PostRoute.js";
 import dalleRoute from "./routes/DalleRoute.js";
 
+dotenv.config();
+
 const corsOptions = {
-  origin: "https://coolartgen.onrender.com",
-  methods: ["GET", "POST"],
-  allowedHeaders:'*',
+  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  methods: ["GET", "POST", "PUT"],
+  allowedHeaders: '*',
+  credentials: true,
 };
 
-dotenv.config();
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
