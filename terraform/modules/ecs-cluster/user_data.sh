@@ -18,10 +18,11 @@ echo "ECS_ENABLE_CONTAINER_METADATA=true" >> /etc/ecs/ecs.config
 # Set available logging drivers
 echo "ECS_AVAILABLE_LOGGING_DRIVERS=[\"json-file\",\"awslogs\"]" >> /etc/ecs/ecs.config
 
-# Enable spot instance draining (if using spot instances)
+# Enable spot instance draining
 echo "ECS_ENABLE_SPOT_INSTANCE_DRAINING=true" >> /etc/ecs/ecs.config
 
-# Start and enable the ECS agent
-systemctl enable --now ecs
+# Restart ECS agent
+sudo stop ecs
+sudo start ecs
 
 echo "ECS instance configuration complete!"
