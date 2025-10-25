@@ -44,7 +44,7 @@ module "ecs_cluster" {
 
   cluster_name          = var.cluster_name
   vpc_id                = module.networking.vpc_id
-  private_subnet_ids    = module.networking.private_subnet_ids
+  private_subnet_ids    = module.networking.public_subnet_ids
   alb_security_group_id = module.networking.alb_security_group_id
   ecs_ami_id            = var.ecs_ami_id
   instance_type         = var.instance_type
@@ -63,6 +63,7 @@ module "alb" {
   vpc_id                = module.networking.vpc_id
   public_subnet_ids     = module.networking.public_subnet_ids
   alb_security_group_id = module.networking.alb_security_group_id
+  certificate_arn       = module.route53.certificate_arn
   tags                  = var.tags
 }
 

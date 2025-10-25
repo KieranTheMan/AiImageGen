@@ -79,8 +79,3 @@ resource "aws_iam_role_policy" "github_actions_ecr" {
 # Get current AWS account ID
 data "aws_caller_identity" "current" {}
 
-# Output the role ARN
-output "cicd_role_arn" {
-  description = "ARN of the CI/CD role"
-  value       = aws_iam_role.github_actions.arn
-}
