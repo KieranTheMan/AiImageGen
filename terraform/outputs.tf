@@ -64,3 +64,9 @@ output "task_execution_role_arn" {
 #   description = "ARN of the task role"
 #   value       = module.iam_roles.task_role_arn
 # }
+
+# Output the role ARN
+output "cicd_role_arn" {
+  description = "ARN of the CI/CD role"
+  value       = aws_iam_role.github_actions.arn
+}
