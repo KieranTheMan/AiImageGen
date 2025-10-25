@@ -27,3 +27,8 @@ output "listener_arn" {
   description = "ARN of the HTTP listener"
   value       = aws_lb_listener.http.arn
 }
+
+output "http_listener_arn" {
+  description = "ARN of the HTTP listener (redirect)"
+  value       = aws_lb_listener.http.arn
+}
