@@ -4,7 +4,7 @@ A full-stack web application that leverages OpenAI's DALL-E API to generate AI-p
 
 ## 🌐 Live Application
 
-**Application URL:** http://ai-image-gen-alb-784972051.eu-west-2.elb.amazonaws.com
+**Application URL:** http://www.coolartgen.co.uk
 
 *Note: The application is deployed on AWS using an Application Load Balancer (ALB). For production use, configure a custom domain with Route 53.*
 
@@ -430,14 +430,7 @@ docker push <account-id>.dkr.ecr.eu-west-2.amazonaws.com/ai-gen-app-frontend:lat
 - Security groups for network isolation
 - SSL/TLS termination at ALB
 - Container image scanning in ECR
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+- Forced HTTP to HTTPS
 
 ## 📝 License
 
@@ -446,14 +439,6 @@ This project is licensed under the ISC License.
 ## 👤 Author
 
 **Kieran**
-- Built with ❤️
-
-## 🙏 Acknowledgments
-
-- OpenAI for the DALL-E API
-- Cloudinary for image storage
-- AWS for cloud infrastructure
-- The open-source community
 
 ---
 
