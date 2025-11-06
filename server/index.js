@@ -40,27 +40,6 @@ app.get("/health", async (req, res) => {
     // Check database connection
     const dbStatus = mongoose.connection.readyState === 1 ? "connected" : "disconnected";
     
-    // Check OpenAI connection
-    let openaiStatus = "unknown";
-    try {
-      // simple models list request to check API access
-      await openai.models.list();
-      openaiStatus = "connected";
-    } catch (error) {
-      openaiStatus = "error";
-      console.error("OpenAI health check failed:", error.message);
-    }
-
-    // Check Cloudinary connection
-    let cloudinaryStatus = "unknown";
-    try {
-      await cloudinary.api.ping();
-      cloudinaryStatus = "connected";
-    } catch (error) {
-      cloudinaryStatus = "error";
-      console.error("Cloudinary health check failed:", error.message);
-    }
-
     const healthStatus = {
       status: "OK",
       timestamp: new Date().toISOString(),
@@ -70,25 +49,12 @@ app.get("/health", async (req, res) => {
       },
       database: {
         status: dbStatus
-      },
-      openai: {
-        status: openaiStatus
-      },
-      cloudinary: {
-        status: cloudinaryStatus
       }
     };
 
-    // If service is down, return 503
-    if (dbStatus !== "connected" || openaiStatus !== "connected" || cloudinaryStatus !== "connected") {
-      res.status(503).json({
-        ...healthStatus,
-        status: "ERROR",
-        message: "One or more services not connected"
-      });
-    } else {
-      res.status(200).json(healthStatus);
-    }
+    // Return 200 if server is up - don't fail on external service issues
+    // This allows the container to stay healthy even if external APIs have temporary issues
+    res.status(200).json(healthStatus);
   } catch (error) {
     res.status(500).json({
       status: "ERROR",
