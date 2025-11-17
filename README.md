@@ -4,7 +4,7 @@ A full-stack web application that leverages OpenAI's DALL-E API to generate AI-p
 
 ## 🌐 Live Application
 
-**Application URL:** https://www.coolartgen.co.uk
+**Application URL:** https://coolartgen.co.uk
 
 *Note: The application is deployed on AWS using an Application Load Balancer (ALB). For production use, configure a custom domain with Route 53.*
 
