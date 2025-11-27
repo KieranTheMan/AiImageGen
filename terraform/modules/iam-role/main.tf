@@ -73,3 +73,28 @@ resource "aws_iam_role_policy" "cloudwatch_logs" {
     ]
   })
 }
+
+# S3 Access for Terraform Config Storage
+resource "aws_iam_role_policy" "s3_terraform_config_access" {
+  name = "${var.cluster_name}-s3-terraform-config-access"
+  role = aws_iam_role.ecs_task_execution.name
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject",
+          "s3:GetObjectVersion",
+          "s3:ListBucket",
+          "s3:ListBucketVersions"
+        ]
+        Resource = [
+          var.s3_config_bucket_arn,
+          "${var.s3_config_bucket_arn}/*"
+        ]
+      }
+    ]
+  })
+}
