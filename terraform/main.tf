@@ -30,11 +30,21 @@ module "ecr" {
   allowed_principals = var.allowed_principals
 }
 
+# S3 Module for Terraform Configuration Storage
+module "terraform_config_s3" {
+  source = "./modules/s3"
+
+  bucket_name = "${var.project_name}-terraform-config"
+
+  tags = var.tags
+}
+
 # IAM Roles Module
 module "iam_roles" {
   source = "./modules/iam-role"
 
   cluster_name = var.cluster_name
+  s3_config_bucket_arn = module.terraform_config_s3.bucket_arn
   tags         = var.tags
 }
 
