@@ -11,3 +11,9 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "s3_config_bucket_arn" {
+  description = "ARN of the S3 bucket for terraform configuration"
+  type        = string
+  default     = ""
+}
